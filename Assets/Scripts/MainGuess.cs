@@ -2,10 +2,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Main : MonoBehaviour
+public class MainGuess : MonoBehaviour
 {
     public Text AuthorTxt;
-    public Text StartTxt;
     
     [SerializeField]private int _min;
     [SerializeField]private int _max;
@@ -15,7 +14,7 @@ public class Main : MonoBehaviour
     private void Start()
     {
         AuthorTxt.text = $"Загадай число от {_min} до {_max}";
-        Invoke("Calculate", 2f);
+        Invoke("CalculateGuess", 2f);
     }
 
     private void Update()
@@ -23,13 +22,13 @@ public class Main : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.DownArrow))
         {
             _max = _guess;
-            Calculate();
+            CalculateGuess();
         }
 
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
             _min = _guess;
-            Calculate();
+            CalculateGuess();
         }
 
         if(Input.GetKeyDown(KeyCode.Space))
@@ -49,7 +48,7 @@ public class Main : MonoBehaviour
         }
     }
 
-    private void Calculate()
+    private void CalculateGuess()
     {
         _guess = (_min + _max)/2;
         AuthorTxt.text = $"Твое число {_guess}?"; _step++;
