@@ -14,8 +14,8 @@ public class Main : MonoBehaviour
     private int _step=0;
     private void Start()
     {
-        StartTxt.text = $"Загадай число от {_min} до {_max}";
-        Calculate();
+        AuthorTxt.text = $"Загадай число от {_min} до {_max}";
+        Invoke("Calculate", 2f);
     }
 
     private void Update()
@@ -35,11 +35,12 @@ public class Main : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             AuthorTxt.text = $"Победа! Затрачено ходов: {_step}";
+            Invoke("Restart", 1.5f);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);  // "SampleScene"
+            Restart();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -51,7 +52,11 @@ public class Main : MonoBehaviour
     private void Calculate()
     {
         _guess = (_min + _max)/2;
-        AuthorTxt.text = $"Твое число {_guess}?";
-        _step++;
+        AuthorTxt.text = $"Твое число {_guess}?"; _step++;
+    }
+
+    private void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);  // "SampleScene"
     }
 }
