@@ -6,8 +6,8 @@ public class MainGuess : MonoBehaviour
 {
     public Text AuthorTxt;
     
-    [SerializeField]private int _min;
-    [SerializeField]private int _max;
+    private int _min = GameManager.minNum;
+    private int _max = GameManager.maxNum;
     
     private int _guess;
     private int _step=0;
