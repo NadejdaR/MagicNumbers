@@ -10,11 +10,21 @@ public class GameManager : MonoBehaviour
     public InputField FromNum;
     public InputField ToNum;
     
-    public static int MinNum = 0;
-    public static int MaxNum = 1000;
+    public static int MinNum;
+    public static int MaxNum;
 
     private void Start()
     {
+        if (FromNum.text != String.Empty && ToNum.text != String.Empty)
+        {
+            MinNum = Convert.ToInt32(FromNum.text);
+            MaxNum = Convert.ToInt32(ToNum.text);
+        }
+        else
+        {
+            MinNum = 0;
+            MaxNum = 1000;
+        }
         FromNum.GetComponent<InputField>().placeholder.GetComponent<Text>().text = Convert.ToString(MinNum);
         ToNum.GetComponent<InputField>().placeholder.GetComponent<Text>().text = Convert.ToString(MaxNum);
     }
@@ -51,4 +61,5 @@ public class GameManager : MonoBehaviour
         MainMenu.SetActive (true);
         OptionsMenu.SetActive (false);
     }
+    
 }
