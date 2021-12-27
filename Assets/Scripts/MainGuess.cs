@@ -4,58 +4,79 @@ using UnityEngine.UI;
 
 public class MainGuess : MonoBehaviour
 {
-    public Text AuthorTxt;
+  public Text AuthorTxt;
+
+  private int _min = GameManager.MinNum;
+  private int _max = GameManager.MaxNum;
+
+  private int _guess;
+  private int _step = 0;
+
+  private bool _isGameOver = true;
+
+  private void Start()
+  {
+    AuthorTxt.text = $"Загадай число от {_min} до {_max}";
+    Invoke(nameof(CalculateGuess), 2f);
+  }
+
+  private void Update()
+  {
+    if (_isGameOver == false)
+    {
+      if (Input.GetKeyDown(KeyCode.DownArrow))
+      {
+        _max = _guess;
+        CalculateGuess();
+      }
+
+      if (Input.GetKeyDown(KeyCode.UpArrow))
+      {
+        _min = _guess;
+        CalculateGuess();
+      }
+
+      if (Input.GetKeyDown(KeyCode.Space))
+      {
+        _isGameOver = true;
+        AuthorTxt.text = $"Победа! Затрачено ходов: {_step}";
+        Invoke(nameof(Restart), 1.5f);
+      }
+    }
+
+    if (Input.GetKeyDown(KeyCode.R))
+    {
+      Restart();
+    }
+
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      Application.Quit();
+    }
     
-    private int _min = GameManager.minNum;
-    private int _max = GameManager.maxNum;
-    
-    private int _guess;
-    private int _step=0;
-    private void Start()
+  }
+
+  private void CalculateGuess()
+  {
+    int guess = _guess;
+    _guess = (_min + _max) / 2;
+    if (guess == _guess)
     {
-        AuthorTxt.text = $"Загадай число от {_min} до {_max}";
-        Invoke("CalculateGuess", 2f);
-    }
+      _isGameOver = true;
+      AuthorTxt.text = $"Не ври! Твое число {_guess}.\n Затрачено ходов: {_step}";
+      Invoke(nameof(Restart), 1.5f);
 
-    private void Update()
+    }
+    else
     {
-        if(Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            _max = _guess;
-            CalculateGuess();
-        }
-
-        if(Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            _min = _guess;
-            CalculateGuess();
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            AuthorTxt.text = $"Победа! Затрачено ходов: {_step}";
-            Invoke("Restart", 1.5f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Restart();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+      AuthorTxt.text = $"Твое число {_guess}?";
+      _step++;
+      _isGameOver = false;
     }
+  }
 
-    private void CalculateGuess()
-    {
-        _guess = (_min + _max)/2;
-        AuthorTxt.text = $"Твое число {_guess}?"; _step++;
-    }
-
-    private void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);  // "SampleScene"
-    }
+  private void Restart()
+  {
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+  }
 }
