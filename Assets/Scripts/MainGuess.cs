@@ -5,14 +5,19 @@ using UnityEngine.UI;
 public class MainGuess : MonoBehaviour
 {
   public Text AuthorTxt;
-
-  private int _min = GameManager.MinNum;
-  private int _max = GameManager.MaxNum;
+  public MainGuessConfig GuessConfig;
 
   private int _guess;
   private int _step = 0;
-
+  private int _min;
+  private int _max;
   private bool _isGameOver = true;
+
+  private void Awake()
+  {
+    _min = GuessConfig.MinNum;
+    _max = GuessConfig.MaxNum;
+  }
 
   private void Start()
   {
@@ -53,7 +58,6 @@ public class MainGuess : MonoBehaviour
     {
       Application.Quit();
     }
-    
   }
 
   private void CalculateGuess()
@@ -65,7 +69,6 @@ public class MainGuess : MonoBehaviour
       _isGameOver = true;
       AuthorTxt.text = $"Не ври! Твое число {_guess}.\n Затрачено ходов: {_step}";
       Invoke(nameof(Restart), 1.5f);
-
     }
     else
     {

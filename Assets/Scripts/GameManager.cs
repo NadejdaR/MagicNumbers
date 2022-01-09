@@ -1,65 +1,20 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject MainMenu;
-    public GameObject OptionsMenu;
-    public InputField FromNum;
-    public InputField ToNum;
-    
-    public static int MinNum;
-    public static int MaxNum;
+  private static GameManager _instance;
 
-    private void Start()
+  public static GameManager Instance => _instance;
+
+  private void Awake()
+  {
+    if (_instance == null)
     {
-        if (FromNum.text != String.Empty && ToNum.text != String.Empty)
-        {
-            MinNum = Convert.ToInt32(FromNum.text);
-            MaxNum = Convert.ToInt32(ToNum.text);
-        }
-        else
-        {
-            MinNum = 0;
-            MaxNum = 1000;
-        }
-        FromNum.GetComponent<InputField>().placeholder.GetComponent<Text>().text = Convert.ToString(MinNum);
-        ToNum.GetComponent<InputField>().placeholder.GetComponent<Text>().text = Convert.ToString(MaxNum);
+      _instance = this;
+      DontDestroyOnLoad(gameObject);
+      return;
     }
 
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-    
-    public void Exit()
-    {
-        Application.Quit();
-    }
-   
-    public void PlayGuessGame()
-    {
-        SceneManager.LoadScene("GuessNumbers");
-    }
-
-    public void PlaySumGame()
-    {
-        SceneManager.LoadScene("SumNumbers");
-    }
-
-    public void Menu()
-    {
-        SceneManager.LoadScene("Menu");
-    }
-
-    public void SubmitOptions()
-    {
-        MinNum = Convert.ToInt32(FromNum.text);
-        MaxNum = Convert.ToInt32(ToNum.text);
-        MainMenu.SetActive (true);
-        OptionsMenu.SetActive (false);
-    }
-    
+    Destroy(gameObject);
+  }
 }

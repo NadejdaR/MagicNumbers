@@ -11,7 +11,6 @@ public class MainSum : MonoBehaviour
   private int _userInp;
   private int _winSum = 50;
   private int _step;
-
   private bool _isGameOver = true;
 
   private void Start()
@@ -96,7 +95,7 @@ public class MainSum : MonoBehaviour
   }
 
   private void CalculateSum()
-  {      
+  {
     _sum += _userInp;
     if (_sum >= _winSum)
     {
