@@ -21,7 +21,7 @@ public class MainSum : MonoBehaviour
 
   private void Update()
   {
-    if (_isGameOver == false)
+    if (!_isGameOver)
     {
       if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
       {

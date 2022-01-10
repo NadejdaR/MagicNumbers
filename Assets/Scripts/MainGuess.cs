@@ -25,7 +25,7 @@ public class MainGuess : MonoBehaviour
 
   public void EqualsBtn()
   {
-Win();
+    Win();
   }
 
   public void MaxBtn()
@@ -50,7 +50,7 @@ Win();
 
   private void Update()
   {
-    if (_isGameOver == false)
+    if (!_isGameOver)
     {
       if (Input.GetKeyDown(KeyCode.DownArrow))
       {
@@ -85,7 +85,6 @@ Win();
   private void CalculateGuess()
   {
     int stepguess = 0;
-    int guess = _guess;
     _guess = (_minGuess + _maxGuess) / 2;
     if (stepguess == _guess)
     {
