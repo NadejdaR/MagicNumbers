@@ -10,41 +10,32 @@ public class MenuSettingView : MonoBehaviour
   public InputField ToNum;
   public MainGuessConfig GuessConfig;
 
-  private int _min;
-  private int _max;
-
-  private void Awake()
-  {
-    _min = GuessConfig.MinNum;
-    _max = GuessConfig.MaxNum;
-  }
-
   private void Start()
   {
     if (FromNum.text != String.Empty && ToNum.text != String.Empty)
     {
-      _min = Convert.ToInt32(FromNum.text);
-      _max = Convert.ToInt32(ToNum.text);
+      GuessConfig.MinNum = Convert.ToInt32(FromNum.text);
+      GuessConfig.MaxNum = Convert.ToInt32(ToNum.text);
     }
     else
     {
-      _min = 0;
-      _max = 1000;
+      GuessConfig.MinNum = 0;
+      GuessConfig.MaxNum = 1000;
     }
 
-    FromNum.GetComponent<InputField>().placeholder.GetComponent<Text>().text = Convert.ToString(_min);
-    ToNum.GetComponent<InputField>().placeholder.GetComponent<Text>().text = Convert.ToString(_max);
+    FromNum.GetComponent<InputField>().placeholder.GetComponent<Text>().text = Convert.ToString(GuessConfig.MinNum);
+    ToNum.GetComponent<InputField>().placeholder.GetComponent<Text>().text = Convert.ToString(GuessConfig.MaxNum);
   }
 
   public void SubmitOptions()
   {
     if (int.TryParse(FromNum.text, out int fromValue))
-      _min = fromValue;
+      GuessConfig.MinNum = fromValue;
     else
       Debug.LogError("fromValue / error");
 
     if (int.TryParse(ToNum.text, out int toValue))
-      _max = toValue;
+      GuessConfig.MaxNum = toValue;
     else
       Debug.LogError("toValue / error");
 

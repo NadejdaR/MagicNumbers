@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,7 @@ public class SceneHelper : MonoBehaviour
 
   public void Exit()
   {
+    EditorApplication.isPlaying = false;
     Application.Quit();
   }
 

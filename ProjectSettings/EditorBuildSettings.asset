@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SumNumbers.unity
     guid: 9478771613da91145a91d52a35cf244a
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: da2044f2578b73e4083d7764d4898074
   m_configObjects: {}
