@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -77,8 +76,11 @@ public class MainGuess : MonoBehaviour
 
     if (Input.GetKeyDown(KeyCode.Escape))
     {
-      EditorApplication.isPlaying = false;
+#if UNITY_EDITOR
+      UnityEditor.EditorApplication.isPlaying = false;
+#else
       Application.Quit();
+#endif
     }
   }
 
