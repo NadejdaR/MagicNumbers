@@ -7,6 +7,7 @@ public class MainGuess : MonoBehaviour
   public Text AuthorTxt;
   public MainGuessConfig GuessConfig;
   public WinSO WinObj;
+  public SceneHelper SceneHelper;
 
   private int _min;
   private int _max;
@@ -23,9 +24,7 @@ public class MainGuess : MonoBehaviour
   }
 
   public void EqualsBtn()
-  {
     Win();
-  }
 
   public void MaxBtn()
   {
@@ -64,24 +63,14 @@ public class MainGuess : MonoBehaviour
       }
 
       if (Input.GetKeyDown(KeyCode.Space))
-      {
         Win();
-      }
     }
 
     if (Input.GetKeyDown(KeyCode.R))
-    {
       Restart();
-    }
 
     if (Input.GetKeyDown(KeyCode.Escape))
-    {
-#if UNITY_EDITOR
-      UnityEditor.EditorApplication.isPlaying = false;
-#else
-      Application.Quit();
-#endif
-    }
+      SceneHelper.Exit();
   }
 
   private void CalculateGuess()
@@ -104,10 +93,7 @@ public class MainGuess : MonoBehaviour
   }
 
   private void Restart()
-  {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-  }
-
+    SceneHelper.Restart();
   private void Win()
   {
     _isGameOver = true;

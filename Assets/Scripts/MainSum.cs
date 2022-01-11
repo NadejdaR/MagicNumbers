@@ -6,6 +6,7 @@ public class MainSum : MonoBehaviour
 {
   public Text AuthorTxt;
   public Text AnswerTxt;
+public SceneHelper SceneHelper;
 
   private int _sum;
   private int _userInp;
@@ -79,19 +80,10 @@ public class MainSum : MonoBehaviour
     }
 
     if (Input.GetKeyDown(KeyCode.R))
-    {
-      Restart();
-    }
+  		SceneHelper.Restart();
 
     if (Input.GetKeyDown(KeyCode.Escape))
-    {
-      Application.Quit();
-    }
-  }
-
-  private void Restart()
-  {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      SceneHelper.Exit();
   }
 
   private void CalculateSum()
