@@ -24,7 +24,9 @@ public class MainGuess : MonoBehaviour
   }
 
   public void EqualsBtn()
+  {
     Win();
+  }
 
   public void MaxBtn()
   {
@@ -67,7 +69,7 @@ public class MainGuess : MonoBehaviour
     }
 
     if (Input.GetKeyDown(KeyCode.R))
-      Restart();
+      SceneHelper.Restart();
 
     if (Input.GetKeyDown(KeyCode.Escape))
       SceneHelper.Exit();
@@ -92,8 +94,6 @@ public class MainGuess : MonoBehaviour
     }
   }
 
-  private void Restart()
-    SceneHelper.Restart();
   private void Win()
   {
     _isGameOver = true;

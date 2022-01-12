@@ -16,7 +16,7 @@ public SceneHelper SceneHelper;
 
   private void Start()
   {
-    AuthorTxt.text = $"Нажмите цифру от 1 до 9";
+    AuthorTxt.text = $"Enter number from 1 to 9";
     Invoke(nameof(CalculateSum), 1.5f);
   }
 
@@ -92,13 +92,13 @@ public SceneHelper SceneHelper;
     if (_sum >= _winSum)
     {
       _isGameOver = true;
-      AnswerTxt.text = $"Игра окончена! Количество ходов: {_step}";
+      AnswerTxt.text = $"Game over! Steps: {_step}";
       Invoke(nameof(Restart), 2f);
     }
     else
     {
       _step++;
-      AnswerTxt.text = $"Сумма: {_sum}";
+      AnswerTxt.text = $"Sum of your number: {_sum}";
       _isGameOver = false;
     }
   }
